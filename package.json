@@ -23,7 +23,21 @@
     "blog:test": "cd scripts/blog-automation && npm run test-connection",
     "blog:publish": "cd scripts/blog-automation && npm run publish-posts",
     "blog:dry-run": "cd scripts/blog-automation && npm run publish-posts -- --dry-run",
-    "blog:schedule-setup": "cd scripts/blog-automation && npm run schedule-setup"
+    "blog:schedule-setup": "cd scripts/blog-automation && npm run schedule-setup",
+    "agent:gsap": "cd ../../.. && npm run agents:gsap",
+    "agent:gsap:performance": "cd ../../.. && npm run agents:gsap:performance",
+    "agent:gsap:mobile": "cd ../../.. && npm run agents:gsap:mobile",
+    "agent:gsap:accessibility": "cd ../../.. && npm run agents:gsap:accessibility",
+    "agent:laravel": "cd ../../.. && npm run agents:laravel",
+    "agent:laravel:health": "cd ../../.. && npm run agents:laravel:health",
+    "agent:laravel:analyze": "cd ../../.. && npm run agents:laravel:analyze",
+    "agent:module": "cd ../../.. && npm run agents:module",
+    "agent:compliance": "cd ../../.. && npm run agents:compliance",
+    "agent:docs": "cd ../../.. && npm run agents:docs",
+    "agent:tech:all": "cd ../../.. && npm run agents:tech:all",
+    "agents:status": "cd ../../.. && npm run agents:status",
+    "ecosystem:sync": "cd ../../.. && npm run ecosystem:registry:sync",
+    "ecosystem:validate": "cd ../../.. && npm run ecosystem:registry:validate"
   },
   "dependencies": {
     "axios": "^1.11.0",
