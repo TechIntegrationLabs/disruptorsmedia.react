@@ -1,6 +1,20 @@
 # Disruptors Media React Site
 
-Modern React 18 + TypeScript + Vite application with comprehensive blog development system and automated publishing workflow.
+> Next-generation AI marketing agency website built with React 19 + TypeScript + Vite
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![TypeScript](https://img.shields.io/badge/typescript-5.8.3-blue)
+![React](https://img.shields.io/badge/react-19.1.1-blue)
+![Vite](https://img.shields.io/badge/vite-7.1.2-purple)
+
+## Overview
+
+The Disruptors Media React Site is a modern, high-performance web application that serves as the primary digital presence for Disruptors Media's AI marketing agency. This **standalone repository** can be developed, deployed, and maintained independently while offering optional integration with the broader DisruptorEcosystem.
+
+🔗 **Repository**: https://github.com/TechIntegrationLabs/disruptorsmedia.react.git  
+🏗️ **Status**: Active Development  
+📚 **Documentation**: Comprehensive standalone documentation included  
+⚡ **Standalone**: Complete self-sufficient operation
 
 ## 🚀 Quick Start
 

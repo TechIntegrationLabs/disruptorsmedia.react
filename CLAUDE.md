@@ -4,9 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-**New Disruptors Media React Site** - Modern React 18 + TypeScript + Vite application with comprehensive blog development roadmap. This is the **PRIMARY DEVELOPMENT FOCUS** within the multi-platform Disruptors Media environment.
+**Disruptors Media React Site** - Standalone modern React 18 + TypeScript + Vite application that serves as the next-generation frontend for Disruptors Media's AI marketing agency. This is a completely **INDEPENDENT REPOSITORY** that can be developed, deployed, and maintained separately from the parent ecosystem.
+
+## Repository Information
 
 **GitHub Repository**: https://github.com/TechIntegrationLabs/disruptorsmedia.react.git
+**Standalone Status**: ✅ Complete standalone repo with all necessary documentation and context
+**Parent Ecosystem**: DisruptorEcosystem (optional integration, not required for operation)
+**Development Priority**: PRIMARY - Active development focus
 
 ## Commands
 
@@ -21,20 +26,27 @@ npm run preview   # Preview production build locally
 ### Quality Control
 ```bash
 npm run lint      # ESLint with TypeScript support
-npm run type-check # TypeScript compilation check (not implemented yet)
-npm test          # Test suite (not implemented yet)
+```
+
+### Blog Automation
+```bash
+npm run blog:setup         # Setup blog automation system
+npm run blog:test          # Test Google Sheets/Docs connection
+npm run blog:publish       # Publish new blog posts from Google Sheets
+npm run blog:dry-run       # Preview blog publishing without committing
+npm run blog:schedule-setup # Setup scheduled blog publishing
 ```
 
 ## Architecture
 
 ### Technology Stack
-- **Framework**: React 18 + TypeScript + Vite
-- **Routing**: React Router DOM v6 
+- **Framework**: React 19 + TypeScript + Vite 7.1.2
+- **Routing**: React Router DOM v6.30.1 
 - **Styling**: CSS modules with planned Tailwind CSS v4 + shadcn/ui migration
-- **HTTP Client**: Axios for API integration (planned: modern fetch with TypeScript)
-- **Animations**: GSAP (business license required)
+- **HTTP Client**: Axios 1.11.0 for API integration
+- **Animations**: GSAP 3.13.0 (business license required)
 - **Utilities**: clsx for conditional class names
-- **Blog System**: MDX + gray-matter + Fuse.js search
+- **Blog System**: MDX + gray-matter + Fuse.js search (via automation scripts)
 - **SEO**: React Helmet Async (planned implementation)
 
 ### Project Structure
@@ -50,11 +62,14 @@ src/
 ```
 
 ### Current Implementation
-- **Basic SPA** with Header/Footer layout and 6 main routes
-- **Responsive header** with mobile hamburger menu
-- **CSS-based styling** with custom fonts (OT Neue Montreal, PP Supply Mono)
-- **Route-based navigation** using React Router
-- **Image assets** in public/images/ and public/fonts/
+- **Complete SPA** with Header/Footer layout and 8 main routes (Home, Services, Portfolio, About, Studio, Contact, Blog, BlogPost)
+- **Responsive header** with mobile hamburger menu and Blog navigation
+- **Custom styling** with Disruptors Media brand fonts (OT Neue Montreal, PP Supply Mono)
+- **React Router v6** navigation with blog post routing (/blog/:year/:slug)
+- **Asset management** with optimized fonts and images in public/ directory
+- **GSAP integration** ready for advanced animations
+- **TypeScript configuration** with project references (app + node configs)
+- **Automated blog system** with Google Sheets/Docs integration for content management
 
 ## Blog Development Plan
 
@@ -87,8 +102,17 @@ src/
     └── BlogCategory.tsx  # Category-specific pages
 ```
 
-### Planned Dependencies
-- **Content**: @mdx-js/react, gray-matter, remark/rehype ecosystem
+### Blog Automation System
+The project includes a comprehensive blog automation system in `scripts/blog-automation/`:
+- **Google Sheets Integration**: Content sourcing via googleapis
+- **Google Docs Processing**: Rich content conversion via cheerio/turndown  
+- **AI Enhancement**: OpenAI integration for content optimization
+- **Image Processing**: Sharp for image optimization
+- **MDX Generation**: Automated MDX file creation with frontmatter
+- **Scheduling**: Automated publishing workflows
+
+### Planned Dependencies  
+- **Content**: @mdx-js/react, remark/rehype ecosystem (gray-matter already integrated)
 - **Design**: shadcn/ui, Tailwind CSS v4, @tailwindcss/typography
 - **Search**: Fuse.js (client-side), future Algolia integration
 - **Features**: react-syntax-highlighter, react-intersection-observer
@@ -146,11 +170,13 @@ VITE_GITHUB_REPO=https://github.com/TechIntegrationLabs/disruptorsmedia.react.gi
 4. Add navigation links in `Header.tsx`
 
 ### Blog Development Workflow
-1. **Follow BLOG_DEVELOPMENT_PLAN.md phases**
-2. **Setup MDX processing** before content creation
-3. **Implement shadcn/ui components** for consistent design
-4. **Test with sample content** before full migration
-5. **Optimize performance** throughout development
+1. **Setup automation system** with `npm run blog:setup`
+2. **Test connections** with `npm run blog:test` 
+3. **Content creation** via Google Sheets/Docs integration
+4. **Publishing workflow** using `npm run blog:publish` or `npm run blog:dry-run`
+5. **Follow BLOG_DEVELOPMENT_PLAN.md phases** for advanced features
+6. **Implement shadcn/ui components** for consistent design
+7. **Optimize performance** throughout development
 
 ### Component Development
 1. **Use TypeScript interfaces** for all props

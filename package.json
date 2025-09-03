@@ -1,8 +1,19 @@
 {
   "name": "disruptorsmedia.react",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Disruptors Media React Site - Next-generation AI marketing agency website with comprehensive blog system",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TechIntegrationLabs/disruptorsmedia.react.git"
+  },
+  "ecosystem": {
+    "parent": "DisruptorEcosystem",
+    "status": "standalone",
+    "integration": "optional",
+    "priority": "primary"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
