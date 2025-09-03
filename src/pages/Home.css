@@ -1,0 +1,141 @@
+/* Home Page Styles */
+.home-page {
+  position: relative;
+}
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  background: rgba(241, 237, 233, 0.95);
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 800px;
+}
+
+.hero-logo {
+  margin-bottom: 60px;
+}
+
+.hero-logo img {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+}
+
+.hero-title {
+  font-family: var(--font-heading-squeezed);
+  font-size: 120px;
+  margin: 60px 0;
+  color: var(--color-dark);
+  text-transform: uppercase;
+  line-height: 0.9;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  background: var(--color-dark);
+  color: var(--color-light);
+  padding: 20px 40px;
+  font-size: 20px;
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  border: 1px solid var(--color-dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.hero-btn:hover {
+  background: transparent;
+  color: var(--color-dark);
+}
+
+/* Content Section */
+.content-section {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.content-section h2 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.content-section p {
+  font-size: 20px;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+  .hero-title {
+    font-size: 80px;
+  }
+  
+  .hero-buttons {
+    gap: 20px;
+  }
+  
+  .hero-btn {
+    font-size: 18px;
+    padding: 18px 30px;
+    min-width: 140px;
+  }
+  
+  .content-section {
+    padding: 80px 0;
+  }
+  
+  .content-section h2 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-logo img {
+    max-width: 250px;
+  }
+  
+  .hero-title {
+    font-size: 60px;
+    margin: 40px 0;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .hero-btn {
+    width: 200px;
+    font-size: 16px;
+    padding: 16px 30px;
+  }
+  
+  .content-section {
+    padding: 60px 0;
+  }
+  
+  .content-section h2 {
+    font-size: 28px;
+  }
+  
+  .content-section p {
+    font-size: 18px;
+  }
+}

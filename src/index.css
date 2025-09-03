@@ -1,0 +1,190 @@
+/* Font Declarations */
+@font-face {
+  font-family: "OT Neue Montreal";
+  src: url("/fonts/OTNeueMontreal-SemiBoldSemiSqueezed.woff2") format("woff2"),
+    url("/fonts/OTNeueMontreal-SemiBoldSemiSqueezed.woff") format("woff"),
+    url("/fonts/OTNeueMontreal-SemiBoldSemiSqueezed.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "OT Neue Montreal Squeezed";
+  src: url("/fonts/OTNeueMontreal-SemiBoldSqueezed.woff2") format("woff2"),
+    url("/fonts/OTNeueMontreal-SemiBoldSqueezed.woff") format("woff"),
+    url("/fonts/OTNeueMontreal-SemiBoldSqueezed.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Supply Mono";
+  src: url("/fonts/PPSupplyMono-Regular.woff2") format("woff2"),
+    url("/fonts/PPSupplyMono-Regular.woff") format("woff"),
+    url("/fonts/PPSupplyMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS Variables */
+:root {
+  --color-dark: #2B2B2B;
+  --color-light: #F1EDE9;
+  --color-accent: #CAC1B8;
+  --font-heading: "OT Neue Montreal", sans-serif;
+  --font-heading-squeezed: "OT Neue Montreal Squeezed", sans-serif;
+  --font-body: "PP Supply Mono", monospace;
+}
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  background-image: url("/images/main-bg.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-dark);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 220.302px;
+  font-family: var(--font-heading-squeezed);
+}
+
+h2 {
+  font-size: 63px;
+}
+
+h3 {
+  font-size: 65px;
+}
+
+h4 {
+  font-size: 40px;
+}
+
+h5 {
+  font-size: 32px;
+}
+
+h6 {
+  font-size: 24px;
+}
+
+/* Links */
+a {
+  color: var(--color-dark);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* Buttons */
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+}
+
+/* Utility Classes */
+.container {
+  width: 100%;
+  max-width: 1430px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 1199px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (max-width: 991px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    max-width: 540px;
+  }
+  
+  h1 {
+    font-size: 60px;
+  }
+  
+  h2 {
+    font-size: 40px;
+  }
+  
+  h3 {
+    font-size: 35px;
+  }
+}
+
+/* Hide/Show Responsive Elements */
+.hide-res {
+  display: block;
+}
+
+.show-res {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .hide-res {
+    display: none;
+  }
+  
+  .show-res {
+    display: block;
+  }
+}
+
+/* Background Pattern */
+.bg-emboss {
+  background-image: url("/images/logo-emboss.png");
+  background-repeat: repeat;
+  background-size: 200px;
+  background-position: center;
+}

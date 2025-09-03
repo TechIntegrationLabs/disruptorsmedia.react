@@ -1,0 +1,18 @@
+/* App Layout */
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 120px; /* Account for fixed header */
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .main-content {
+    padding-top: 90px;
+  }
+}
