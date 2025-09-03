@@ -31,6 +31,11 @@ Before running setup, ensure you have:
 1. ✅ OpenAI API key from [platform.openai.com](https://platform.openai.com/api-keys)
 2. ✅ Sufficient credits (~$0.12 per blog post)
 
+### Environment Configuration
+The system supports environment files in **two locations**:
+- ✅ **Root directory** (`.env`) - Recommended for overall project config
+- ✅ **Blog automation folder** (`scripts/blog-automation/.env`) - Self-contained option
+
 ### Spreadsheet Structure
 Your Google Sheet needs:
 1. ✅ **Column B**: Google Docs URLs

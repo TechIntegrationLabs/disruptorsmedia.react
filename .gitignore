@@ -1,5 +1,37 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Environment files (both root and automation folder)
 .env
-.DS_Store
+.env.local
+.env.*.local
+service-account-key.json
+
+# Logs
 *.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# Blog automation specific
+scripts/blog-automation/scheduler.lock
+
+# Optional: Generated blog content (uncomment if you don't want to commit generated posts)
+# src/content/blog/
+# public/images/blog/

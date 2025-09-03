@@ -5,9 +5,9 @@ import { promisify } from 'util';
 import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
+import { EnvLoader } from './config/envLoader.js';
 
-dotenv.config();
+EnvLoader.load();
 
 const execAsync = promisify(exec);
 const __filename = fileURLToPath(import.meta.url);

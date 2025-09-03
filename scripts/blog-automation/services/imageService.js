@@ -5,9 +5,9 @@ import fs from 'fs-extra';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import slugify from 'slugify';
-import dotenv from 'dotenv';
+import { EnvLoader } from '../config/envLoader.js';
 
-dotenv.config();
+EnvLoader.load();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

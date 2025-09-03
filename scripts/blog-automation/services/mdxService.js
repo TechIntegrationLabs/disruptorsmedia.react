@@ -3,9 +3,9 @@ import path from 'path';
 import matter from 'gray-matter';
 import slugify from 'slugify';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
+import { EnvLoader } from '../config/envLoader.js';
 
-dotenv.config();
+EnvLoader.load();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

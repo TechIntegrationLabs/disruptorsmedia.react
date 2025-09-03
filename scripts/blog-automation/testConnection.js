@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import dotenv from 'dotenv';
+import { EnvLoader } from './config/envLoader.js';
 import { SheetsService } from './services/sheetsService.js';
 import { DocsService } from './services/docsService.js';
 import OpenAI from 'openai';
 
-dotenv.config();
+EnvLoader.load();
 
 /**
  * Test all service connections

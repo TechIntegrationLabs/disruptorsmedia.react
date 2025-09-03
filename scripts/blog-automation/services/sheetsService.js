@@ -1,7 +1,7 @@
 import { GoogleAuthService } from '../config/googleAuth.js';
-import dotenv from 'dotenv';
+import { EnvLoader } from '../config/envLoader.js';
 
-dotenv.config();
+EnvLoader.load();
 
 /**
  * Google Sheets Service for reading blog post data

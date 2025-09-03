@@ -1,9 +1,9 @@
 import { google } from 'googleapis';
-import dotenv from 'dotenv';
+import { EnvLoader } from './envLoader.js';
 import { readFileSync } from 'fs';
 import path from 'path';
 
-dotenv.config();
+EnvLoader.load();
 
 /**
  * Google API Authentication Setup

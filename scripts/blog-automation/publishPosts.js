@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-import dotenv from 'dotenv';
+import { EnvLoader } from './config/envLoader.js';
 import { SheetsService } from './services/sheetsService.js';
 import { DocsService } from './services/docsService.js';
 import { ImageService } from './services/imageService.js';
 import { MdxService } from './services/mdxService.js';
 
-dotenv.config();
+EnvLoader.load();
 
 /**
  * Main Blog Post Publishing Automation
