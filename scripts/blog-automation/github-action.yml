@@ -1,0 +1,167 @@
+name: Automated Blog Publishing
+
+# This GitHub Action can be used to automatically run the blog automation
+# Copy this file to .github/workflows/blog-automation.yml to activate
+
+on:
+  # Run on schedule (every 6 hours)
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run in dry mode (no files created)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+      force:
+        description: 'Force run (ignore approval checks)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  publish-blog-posts:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'scripts/blog-automation/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd scripts/blog-automation
+          npm ci
+
+      - name: Create Google Service Account credentials
+        run: |
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > scripts/blog-automation/service-account-key.json
+
+      - name: Setup environment variables
+        run: |
+          cd scripts/blog-automation
+          cat > .env << EOF
+          GOOGLE_APPLICATION_CREDENTIALS=service-account-key.json
+          SPREADSHEET_ID=${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          SHEET_NAME=Sheet1
+          BLOG_CONTENT_PATH=../../src/content/blog
+          BLOG_IMAGES_PATH=../../public/images/blog
+          IMAGE_MODEL=dall-e-3
+          IMAGE_SIZE=1024x1024
+          IMAGE_QUALITY=standard
+          DRY_RUN=${{ github.event.inputs.dry_run || 'false' }}
+          REQUIRE_APPROVAL=${{ github.event.inputs.force == 'true' && 'false' || 'true' }}
+          AUTO_PUBLISH=true
+          EOF
+
+      - name: Test connections
+        run: |
+          cd scripts/blog-automation
+          npm run test-connection
+
+      - name: Run blog automation
+        run: |
+          cd scripts/blog-automation
+          npm run publish-posts
+
+      - name: Configure Git
+        if: success() && github.event.inputs.dry_run != 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit and push changes
+        if: success() && github.event.inputs.dry_run != 'true'
+        run: |
+          # Check if there are changes to commit
+          if [ -n "$(git status --porcelain)" ]; then
+            git add src/content/blog/ public/images/blog/
+            git commit -m "feat: Auto-publish blog posts - $(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+            🤖 Generated with Blog Automation System
+            
+            Co-Authored-By: Blog Automation <noreply@disruptorsmedia.com>"
+            git push
+            echo "✅ New blog posts published and deployed"
+          else
+            echo "ℹ️ No new blog posts to publish"
+          fi
+
+      - name: Clean up credentials
+        if: always()
+        run: |
+          rm -f scripts/blog-automation/service-account-key.json
+          rm -f scripts/blog-automation/.env
+
+      - name: Post-run summary
+        if: always()
+        run: |
+          echo "## 📊 Blog Automation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Dry Run:** ${{ github.event.inputs.dry_run || 'false' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Force Mode:** ${{ github.event.inputs.force || 'false' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered:** ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ -f scripts/blog-automation/logs/scheduler.log ]; then
+            echo "### 📋 Automation Log" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+            tail -20 scripts/blog-automation/logs/scheduler.log >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # Optional: Send notification on failure
+  notify-on-failure:
+    needs: publish-blog-posts
+    runs-on: ubuntu-latest
+    if: failure()
+    
+    steps:
+      - name: Send Slack notification
+        if: ${{ secrets.SLACK_WEBHOOK_URL }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          text: "🚨 Blog automation failed in ${{ github.repository }}"
+          webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Create GitHub issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🤖 Blog Automation Failed',
+              body: `The automated blog publishing workflow failed.
+              
+              **Details:**
+              - Workflow: ${context.workflow}
+              - Run ID: ${context.runId}
+              - Commit: ${context.sha}
+              - Actor: ${context.actor}
+              
+              Please check the workflow logs for more details.`,
+              labels: ['bug', 'automation']
+            })

@@ -1,0 +1,26 @@
+# Environment files
+.env
+
+# Google Service Account Key
+service-account-key.json
+*.json
+
+# Logs
+logs/
+*.log
+
+# Node modules
+node_modules/
+
+# Temporary files
+.DS_Store
+.vscode/
+*.tmp
+*.temp
+
+# Lock files
+scheduler.lock
+
+# Generated content (optional - you may want to commit these)
+# ../../src/content/blog/
+# ../../public/images/blog/

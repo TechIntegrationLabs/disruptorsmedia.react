@@ -1,0 +1,18 @@
+# Blog Content Directory
+
+This directory will contain MDX blog posts organized by year.
+
+Structure:
+```
+blog/
+├── 2024/
+│   ├── post-slug-1.mdx
+│   └── post-slug-2.mdx
+├── 2025/
+│   └── another-post.mdx
+└── authors/
+    ├── author-1.json
+    └── author-2.json
+```
+
+MDX files are generated automatically by the blog automation system in `scripts/blog-automation/`.
